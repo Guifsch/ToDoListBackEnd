@@ -27,10 +27,10 @@ mongoose
     console.log(err, "ERROR");
   });
 const corsOptions = {
-  origin: ["https://guifsch.github.io/"],
+  origin: ["https://guifsch.github.io/gymBroFrontEnd/"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Incluindo OPTIONS
-  allowedHeaders: ["Content-Type", "Authorization"], // Adicione outros cabeçalhos se necessário
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Adicione outros cabeçalhos se necessário
 };
 
 // Middleware de CORS
