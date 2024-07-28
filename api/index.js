@@ -27,7 +27,7 @@ mongoose
     console.log(err, "ERROR");
   });
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["https://guifsch.github.io/"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Incluindo OPTIONS
   allowedHeaders: ["Content-Type", "Authorization"], // Adicione outros cabeçalhos se necessário
