@@ -27,10 +27,10 @@ mongoose
     console.log(err, "ERROR");
   });
 const corsOptions = {
-  origin: ["https://gym-bro-frontend.vercel.app", "http://localhost:5173"],
+  origin: ["https://guifsch.github.io"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Incluindo OPTIONS
-  allowedHeaders: ["Content-Type", "Authorization"], // Adicione outros cabeçalhos se necessário
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Adicione outros cabeçalhos se necessário
 };
 
 // Middleware de CORS
