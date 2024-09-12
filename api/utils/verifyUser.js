@@ -7,12 +7,15 @@ export const verifyToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
+
+      const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
       res.cookie("access_token", "", {
         httpOnly: true,
         expires: new Date(0),
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
         path: "/",
+        domain: domain,
       });
       return next(errorHandler(403, "Você não está autentificado!"));
     }
@@ -22,12 +25,14 @@ export const verifyToken = (req, res, next) => {
 
     const expiryDate = new Date(Date.now() + 3600000);
 
+    const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
     res.cookie("access_token", newToken, {
       httpOnly: true,
       expires: expiryDate,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       path: "/",
+      domain: domain,
     });
 
     req.user = user;
