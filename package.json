@@ -1,12 +1,12 @@
 {
-  "name": "gym_bro_project_mongodb",
+  "name": "to_do_mern",
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon api/index.js",
-    "start": "cross-env NODE_ENV=production node api/index.js"
+    "start": "node api/index.js"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +24,9 @@
     "mongoose": "^8.3.4",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.0",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "swagger-jsdoc": "^6.0.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

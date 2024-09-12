@@ -4,12 +4,12 @@ import dotenv from "dotenv";
 import cors from "cors";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
-import workoutRoutes from "./routes/workout.route.js";
-import categoryRoutes from "./routes/category.route.js";
-import calendarRoutes from "./routes/calendar.route.js";
-import setRoutes from "./routes/set.route.js";
+import tasksRoutes from "./routes/tasks.route.js";
 import resetRoutes from "./routes/reset.route.js";
+import sendEmail from "./routes/form.route.js";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
+import { swaggerDocs, swaggerUiOptions } from "./swaggerConfig.js";
 
 dotenv.config();
 
@@ -19,38 +19,50 @@ mongoose
   .connect(process.env.MONGO)
   .then(() => {
     console.log("MongoDB conectado");
-    app.listen(process.env.PORT || 3000, (req, res) => {
-      console.log(`Servidor rodando na porta: 3000.`);
+    const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta: ${PORT}.`);
     });
   })
   .catch((err) => {
     console.log(err, "ERROR");
   });
+
 const corsOptions = {
-  origin: ["https://guifsch.github.io"],
+  origin: [
+    "https://avaliacao-fullstack.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:4000",
+  ],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Incluindo OPTIONS
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Adicione outros cabeçalhos se necessário
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
 };
 
 // Middleware de CORS
 app.use(cors(corsOptions));
 
 // Middleware para tratar solicitações OPTIONS
-app.options('*', cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Outros middlewares
-app.use(cookieParser()); // Extrai as informações contidas nos cookies e as torna acessíveis para o servidor
-app.use(express.json()); // Middleware usado para analisar o corpo das solicitações HTTP com formato JSON
+app.use(cookieParser());
+app.use(express.json());
+
+// Configuração do Swagger
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocs, swaggerUiOptions)
+);
+//Para acessar a documentação entre em http://localhost:4000/api-docs/
 
 // Suas rotas
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/workout", workoutRoutes);
-app.use("/api/category", categoryRoutes);
-app.use("/api/set", setRoutes);
-app.use("/api/calendar", calendarRoutes);
+app.use("/api/tasks", tasksRoutes);
 app.use("/api/reset", resetRoutes);
+app.use("/api/mail", sendEmail);
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {

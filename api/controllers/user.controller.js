@@ -17,9 +17,7 @@ export const getUser = async (req, res, next) => {
     const { password, ...resto } = user._doc;
     res.status(200).json(resto);
   } catch (error) {
-    next(
-      errorHandler(400, "Oops, algo deu errado!")
-    );
+    next(errorHandler(400, "Oops, algo deu errado!"));
   }
 };
 
@@ -30,11 +28,10 @@ export const updateUser = async (req, res, next) => {
     ); //verifica se a pessoa que está querendo atualizar o perfil é realmente a dona do perfil
   }
 
-  if (!req.body.username || !req.body.email || !req.body.profilePicture)
-  {
+  if (!req.body.username || !req.body.email || !req.body.profilePicture) {
     return next(
       errorHandler(401, "Por favor preencha todos os campos obrigatórios!")
-    ); 
+    );
   }
   try {
     if (req.body.password) {
@@ -51,14 +48,12 @@ export const updateUser = async (req, res, next) => {
           profilePicture: req.body.profilePicture,
         },
       },
-      { new: true, runValidators: true  }
+      { new: true, runValidators: true }
     );
     const { password, ...resto } = updatedUser._doc;
     res.status(200).json(resto);
   } catch (error) {
-    next(
-      errorHandler(400, "Oops, algo deu errado!")
-    );
+    next(errorHandler(400, "Oops, algo deu errado!"));
   }
 };
 
@@ -70,9 +65,6 @@ export const deleteUser = async (req, res, next) => {
     await User.findByIdAndDelete(req.params.id);
     res.status(200).json("Usuário deletado com successo!");
   } catch (error) {
-    next(
-      errorHandler(400, "Oops, algo deu errado!")
-    );
+    next(errorHandler(400, "Oops, algo deu errado!"));
   }
 };
-
