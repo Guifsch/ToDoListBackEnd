@@ -32,6 +32,7 @@ const corsOptions = {
   origin: [
     "https://avaliacao-fullstack.vercel.app",
     "http://localhost:3000",
+    "http://localhost:4000",
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
