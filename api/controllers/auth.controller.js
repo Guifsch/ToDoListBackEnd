@@ -33,7 +33,7 @@ export const signup = async (req, res, next) => {
     await newUser.save();
     res.status(201).json({ message: "Usuário criado com sucesso" });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     next(errorHandler(400, "Oops, algo deu errado!"));
   }
 };
@@ -61,40 +61,41 @@ export const signin = async (req, res, next) => {
     // Excluir a senha dos dados que serão retornados
     const { password: hashedPassword, ...resto } = validUser._doc;
 
-    const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
+    const domain =
+      process.env.NODE_ENV === "production"
+        ? "todolistbackend-09c5.onrender.com"
+        : "localhost";
 
     // Configurar o cookie
     res
       .cookie("access_token", token, {
         httpOnly: true,
         expires: expiryDate,
-        secure: process.env.NODE_ENV === "production", // Use secure em produção
-        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Configuração para produção
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
         path: "/",
         domain: domain,
       })
       .status(200)
       .json(resto);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     next(errorHandler(400, "Oops, algo deu errado!"));
   }
 };
 
 export const signout = (req, res) => {
   try {
-    // res
-    //   .clearCookie("access_token")
-    //   .status(200)
-    //   .json({ message: "Desconectado com sucesso!" });
-    const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
-
-
-      res.clearCookie("access_token", {
+    const domain =
+      process.env.NODE_ENV === "production"
+        ? "todolistbackend-09c5.onrender.com"
+        : "localhost";
+    res
+      .clearCookie("access_token", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure em produção
-        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // Configuração para produção
-        path: "/", // Use o mesmo caminho usado ao definir o cookie
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        path: "/",
         domain: domain,
       })
       .status(200)

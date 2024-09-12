@@ -1,5 +1,10 @@
 import swaggerJsDoc from "swagger-jsdoc";
 
+const serverUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://todolistbackend-09c5.onrender.com"
+    : "http://localhost:4000";
+
 // Configuração do Swagger
 const swaggerOptions = {
   swaggerDefinition: {
@@ -14,7 +19,10 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "/",
+        url: "http://localhost:4000",
+      },
+      {
+        url: "https://todolistbackend-09c5.onrender.com",
       },
     ],
     components: {
@@ -23,6 +31,103 @@ const swaggerOptions = {
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
+        },
+      },
+      schemas: {
+        UserCoppers: {
+          type: 'object',
+          properties: {
+            username: {
+              type: 'string',
+              description: 'Nome de usuário único',
+              example: 'john_doe'
+            },
+            email: {
+              type: 'string',
+              description: 'Email do usuário único',
+              example: 'john_doe@example.com'
+            },
+            password: {
+              type: 'string',
+              description: 'Senha do usuário',
+              example: 'senhaSegura123'
+            },
+            profilePicture: {
+              type: 'string',
+              description: 'URL da imagem de perfil do usuário',
+              example: 'https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg'
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Data de criação do usuário',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Data de atualização do usuário',
+            }
+          },
+          required: ['username', 'email'],
+        },
+        Tasks: {
+          type: 'object',
+          properties: {
+            userId: {
+              type: 'string',
+              description: 'ID do usuário ao qual a tarefa pertence',
+              example: '6140d1f495d4c5a9b1d1f9c1',
+            },
+            description: {
+              type: 'string',
+              description: 'Descrição da tarefa',
+              example: 'Concluir o relatório semanal',
+            },
+            status: {
+              type: 'string',
+              description: 'Status da tarefa',
+              enum: ['to-do', 'done'],
+              example: 'to-do',
+            },
+            order: {
+              type: 'integer',
+              description: 'Ordem da tarefa na lista',
+              example: 1,
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Data de criação da tarefa',
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Data de atualização da tarefa',
+            },
+          },
+          required: ['userId', 'description', 'status', 'order'],
+        },
+        ResetToken: {
+          type: 'object',
+          properties: {
+            token: {
+              type: 'string',
+              description: 'Token de redefinição de senha',
+              example: 'abc123resetToken',
+            },
+            userId: {
+              type: 'string',
+              description: 'ID do usuário associado ao token',
+              example: '6140d1f495d4c5a9b1d1f9c1',
+            },
+            expires: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Data de expiração do token',
+              example: '2024-12-31T23:59:59.000Z',
+            },
+          },
+          required: ['token', 'userId', 'expires'],
         },
       },
     },

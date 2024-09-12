@@ -19,7 +19,7 @@ mongoose
   .connect(process.env.MONGO)
   .then(() => {
     console.log("MongoDB conectado");
-    const PORT = process.env.PORT || 4000;
+    const PORT = 4000;
     app.listen(PORT, () => {
       console.log(`Servidor rodando na porta: ${PORT}.`);
     });
@@ -32,7 +32,6 @@ const corsOptions = {
   origin: [
     "https://avaliacao-fullstack.vercel.app",
     "http://localhost:3000",
-    "http://localhost:4000",
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

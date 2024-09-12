@@ -69,7 +69,7 @@ router.post("/signup", signup);
  *       404:
  *         description: Usuário não encontrado
  */
-router.get("/signin", signin);
+router.post("/signin", signin);
 
 /**
  * @swagger

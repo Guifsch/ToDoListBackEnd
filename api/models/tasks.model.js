@@ -14,10 +14,12 @@ const taskSchema = new mongoose.Schema(
       type: String,
       enum: ["to-do", "done"],
       default: "to-do",
+      required: true,
     },
     order: {
       type: Number,
       default: 0,
+      required: true,
     },
   },
   { timestamps: true }
