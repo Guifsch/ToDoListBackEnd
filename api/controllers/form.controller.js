@@ -37,6 +37,7 @@ export const sendEmail = async (req, res, next) => {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: "E-mail enviado com sucesso!" });
   } catch (error) {
+    console.log(error)
     next(
       errorHandler(500, "Erro ao enviar o e-mail, tente novamente mais tarde.")
     );
