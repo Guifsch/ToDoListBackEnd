@@ -19,10 +19,10 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:4000",
+        url: "https://todolistbackend-09c5.onrender.com",
       },
       {
-        url: "https://todolistbackend-09c5.onrender.com",
+        url: "http://localhost:4000",
       },
     ],
     components: {
