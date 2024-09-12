@@ -61,7 +61,7 @@ export const signin = async (req, res, next) => {
     // Excluir a senha dos dados que serão retornados
     const { password: hashedPassword, ...resto } = validUser._doc;
 
-    const domain = process.env.NODE_ENV === "production" ? 'todolist-backend-jade.vercel.app' : 'localhost';
+    const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
 
     // Configurar o cookie
     res
@@ -87,7 +87,7 @@ export const signout = (req, res) => {
     //   .clearCookie("access_token")
     //   .status(200)
     //   .json({ message: "Desconectado com sucesso!" });
-    const domain = process.env.NODE_ENV === "production" ? 'todolist-backend-jade.vercel.app' : 'localhost';
+    const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
 
 
       res.clearCookie("access_token", {
