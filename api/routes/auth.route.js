@@ -74,7 +74,7 @@ router.get("/signin", signin);
 /**
  * @swagger
  * /api/auth/signout:
- *   post:
+ *   get:
  *     summary: Realiza o logout de um usuário
  *     tags: [Auth]
  *     responses:
