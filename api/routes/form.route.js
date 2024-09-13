@@ -35,9 +35,6 @@ const router = express.Router();
  *               message:
  *                 type: string
  *                 description: "Mensagem do remetente"
- *               recipientEmail:
- *                 type: string
- *                 description: "(Opcional) Email que receberá a mensagem do formulário. Se não fornecido, será usado o predefinido."
  *     responses:
  *       200:
  *         description: "E-mail enviado com sucesso"
