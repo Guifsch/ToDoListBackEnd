@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 // Função para enviar o e-mail
 export const sendEmail = async (req, res, next) => {
-  const { name, email, phoneNumber, message, recipientEmail } = req.body;
+  const { name, email, phoneNumber, message} = req.body;
 
   // Verificação de campos obrigatórios
   if (!name || !email || !phoneNumber || !message) {
@@ -23,11 +23,9 @@ export const sendEmail = async (req, res, next) => {
     );
   }
 
-  // Usa o recipientEmail fornecido ou o predefinido
-  const toEmail = recipientEmail || process.env.RECIPIENT_EMAIL;
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: toEmail, // E-mail que vai receber a mensagem
+    to: email,
     subject: `Nova mensagem de contato de ${name}`,
     text: `Nome: ${name}\nEmail: ${email}\nTelefone: ${phoneNumber}\n\nMensagem:\n${message}`,
   };
