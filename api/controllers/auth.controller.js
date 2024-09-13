@@ -63,7 +63,7 @@ export const signin = async (req, res, next) => {
 
     const domain =
       process.env.NODE_ENV === "production"
-        ? "todolistbackend-09c5.onrender.com"
+        ? "todolistbackend-c7sp.onrender.com"
         : "localhost";
 
     // Configurar o cookie
@@ -88,7 +88,7 @@ export const signout = (req, res) => {
   try {
     const domain =
       process.env.NODE_ENV === "production"
-        ? "todolistbackend-09c5.onrender.com"
+        ? "todolistbackend-c7sp.onrender.com"
         : "localhost";
     res
       .clearCookie("access_token", {

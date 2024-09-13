@@ -35,8 +35,8 @@ export const forgotPassword = async (req, res, next) => {
     await resetToken.save();
     const baseUrl =
       process.env.NODE_ENV === "production"
-        ? "https://gym-bro-frontend.vercel.app"
-        : "http://localhost:5173";
+        ? "todolistbackend-c7sp.onrender.com"
+        : "http://localhost:4000";
 
     const resetUrl = `${baseUrl}/reset-password?token=${token}&id=${resetToken._id}`;
 

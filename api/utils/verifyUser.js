@@ -8,7 +8,7 @@ export const verifyToken = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
 
-      const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
+      const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-c7sp.onrender.com' : 'localhost';
       res.cookie("access_token", "", {
         httpOnly: true,
         expires: new Date(0),
@@ -25,7 +25,7 @@ export const verifyToken = (req, res, next) => {
 
     const expiryDate = new Date(Date.now() + 3600000);
 
-    const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-09c5.onrender.com' : 'localhost';
+    const domain = process.env.NODE_ENV === "production" ? 'todolistbackend-c7sp.onrender.com' : 'localhost';
     res.cookie("access_token", newToken, {
       httpOnly: true,
       expires: expiryDate,
