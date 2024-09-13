@@ -30,7 +30,7 @@ mongoose
 
 const corsOptions = {
   origin: [
-    "todolistbackend-c7sp.onrender.com",
+    "https://todolistbackend-c7sp.onrender.com/",
     "http://localhost:3000",
     "http://localhost:4000",
   ],
