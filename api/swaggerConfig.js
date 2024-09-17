@@ -1,10 +1,5 @@
 import swaggerJsDoc from "swagger-jsdoc";
 
-const serverUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://todolistbackend-09c5.onrender.com"
-    : "http://localhost:4000";
-
 // Configuração do Swagger
 const swaggerOptions = {
   swaggerDefinition: {
@@ -19,7 +14,10 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: serverUrl,
+        url: "https://todolistbackend-c7sp.onrender.com",
+      },
+      {
+        url: "http://localhost:4000",
       },
     ],
     components: {
