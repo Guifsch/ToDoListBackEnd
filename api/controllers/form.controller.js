@@ -1,16 +1,23 @@
 import nodemailer from "nodemailer";
 import { errorHandler } from "../utils/error.js";
+import sgTransport from "nodemailer-sendgrid";
 
 // Configuração do transporte do Nodemailer
-const transporter = nodemailer.createTransport({
-  host: "smtp-mail.outlook.com",
-  port: 587,
-  secure: false, // true para 465, false para outras portas
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// const transporter = nodemailer.createTransport({
+//   host: "smtp-mail.outlook.com",
+//   port: 587,
+//   secure: false, // true para 465, false para outras portas
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS,
+//   },
+// });
+
+const transporter = nodemailer.createTransport(
+  sgTransport({
+    apiKey: process.env.SENDGRID_API_KEY,
+  })
+);
 
 // Função para enviar o e-mail
 export const sendEmail = async (req, res, next) => {
@@ -35,9 +42,8 @@ export const sendEmail = async (req, res, next) => {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: "E-mail enviado com sucesso!" });
   } catch (error) {
-    console.log(error)
     next(
-      errorHandler(500, "Erro ao enviar o e-mail, tente novamente mais tarde.")
+      errorHandler(500, error)
     );
   }
 };
